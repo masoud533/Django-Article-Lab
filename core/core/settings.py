@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # internal apps
-    "accounts",
+    'accounts.apps.AccountsConfig',
     #"blog",
 ]
 
