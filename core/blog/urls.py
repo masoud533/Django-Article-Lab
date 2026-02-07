@@ -1,7 +1,11 @@
 from django.urls import path
-from .views import indexView
+from . import views
+from django.views.generic.base import RedirectView
 
+app_name = "blog"
 
 urlpatterns = [
-    path('', indexView, name="fbv-test")
+    path('fbv-index', views.indexView, name="fbv-test"),
+    path('cbv-index', views.IndexView.as_view(), name="cbv-test"),
+    path('go-to-index', RedirectView.as_view(pattern_name="blog:cbv-test"), name="redirect-to-index")
 ]
