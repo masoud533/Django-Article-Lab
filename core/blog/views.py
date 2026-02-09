@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from .models import Post
 
 def indexView(request):
@@ -23,3 +23,8 @@ class PostList(ListView):
     def get_queryset(self):
         posts = Post.objects.filter(status=True)
         return posts 
+
+class PostDetail(DetailView):
+    model = Post
+
+    
