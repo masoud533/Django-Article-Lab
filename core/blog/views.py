@@ -4,6 +4,7 @@ from django.views.generic import (TemplateView, ListView,
                                   CreateView, UpdateView, DeleteView)
 from .models import Post
 from .forms import CreatePost
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def indexView(request):
     return render(request,"index.html")
@@ -17,7 +18,7 @@ class IndexView(TemplateView):
         context['posts'] = Post.objects.all()
         return context
     
-class PostList(ListView):
+class PostList(LoginRequiredMixin, ListView):
     # model = Post
     # queryset = Post.object.all()
     context_object_name = 'posts'
@@ -43,7 +44,7 @@ class ContactFormView(FormView):
         return super().form_valid(form)
 '''
 
-class ContactFormView(CreateView):
+class ContactFormView(LoginRequiredMixin, CreateView):
     model = Post
     # filds = ['author','title','content', 'status', 'published_date']
     form_class = CreatePost
@@ -53,11 +54,11 @@ class ContactFormView(CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
-class UpdatePostView(UpdateView):
+class UpdatePostView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = CreatePost
     success_url = '/blog/post/'
 
-class DeletePostView(DeleteView):
+class DeletePostView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = '/blog/post/'
