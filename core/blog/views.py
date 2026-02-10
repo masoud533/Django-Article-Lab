@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, FormView
 from .models import Post
+from .forms import CreatePost
 
 def indexView(request):
     return render(request,"index.html")
@@ -27,4 +28,14 @@ class PostList(ListView):
 class PostDetail(DetailView):
     model = Post
 
-    
+
+class ContactFormView(FormView):
+    template_name = "contact.html"
+    form_class = CreatePost
+    success_url = "/blog/post/"
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.save()
+        return super().form_valid(form)
