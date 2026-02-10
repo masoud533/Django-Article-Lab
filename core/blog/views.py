@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView, FormView, CreateView
+from django.views.generic import (TemplateView, ListView, 
+                                  DetailView, FormView, CreateView, UpdateView)
 from .models import Post
 from .forms import CreatePost
 
@@ -46,3 +47,12 @@ class ContactFormView(CreateView):
     # filds = ['author','title','content', 'status', 'published_date']
     form_class = CreatePost
     success_url = "/blog/post/"
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+class UpdatePostView(UpdateView):
+    model = Post
+    form_class = CreatePost
+    success_url = '/blog/post/'
