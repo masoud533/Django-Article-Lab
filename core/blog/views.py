@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import (TemplateView, ListView, 
-                                  DetailView, FormView, CreateView, UpdateView)
+                                  DetailView, FormView, 
+                                  CreateView, UpdateView, DeleteView)
 from .models import Post
 from .forms import CreatePost
 
@@ -55,4 +56,8 @@ class ContactFormView(CreateView):
 class UpdatePostView(UpdateView):
     model = Post
     form_class = CreatePost
+    success_url = '/blog/post/'
+
+class DeletePostView(DeleteView):
+    model = Post
     success_url = '/blog/post/'

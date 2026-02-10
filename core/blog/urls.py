@@ -11,5 +11,6 @@ urlpatterns = [
     path('post/<int:pk>/', views.PostDetail.as_view(), name='post-detail'),
     path('post/create/', views.ContactFormView.as_view(), name='post-create'),
     path('post/<int:pk>/edit/', views.UpdatePostView.as_view(), name='post-edit'),
+    path('post/<int:pk>/delete/', views.DeletePostView.as_view(), name='post-delete'),
     path('go-to-index', RedirectView.as_view(pattern_name="blog:cbv-test"), name="redirect-to-index")
 ]
