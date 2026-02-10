@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView, FormView
+from django.views.generic import TemplateView, ListView, DetailView, FormView, CreateView
 from .models import Post
 from .forms import CreatePost
 
@@ -28,7 +28,7 @@ class PostList(ListView):
 class PostDetail(DetailView):
     model = Post
 
-
+'''
 class ContactFormView(FormView):
     template_name = "contact.html"
     form_class = CreatePost
@@ -39,3 +39,10 @@ class ContactFormView(FormView):
         # It should return an HttpResponse.
         form.save()
         return super().form_valid(form)
+'''
+
+class ContactFormView(CreateView):
+    model = Post
+    # filds = ['author','title','content', 'status', 'published_date']
+    form_class = CreatePost
+    success_url = "/blog/post/"
