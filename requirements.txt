@@ -5,3 +5,4 @@ tzdata==2025.3
 psycopg2>=2.8
 python-decouple
 pillow
+djangorestframework
