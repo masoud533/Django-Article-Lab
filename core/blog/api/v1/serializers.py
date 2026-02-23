@@ -5,7 +5,7 @@ from blog.models import Post
 #     id = serializers.IntegerField()
 #     title = serializers.CharField(max_length=255)
 
-class postSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Post
