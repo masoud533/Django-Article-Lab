@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from blog.models import Post, Category
 
+"""--- Serializers define the API representation. ---"""
+
 # class postSerializer(serializers.Serializer):
 #     id = serializers.IntegerField()
 #     title = serializers.CharField(max_length=255)
