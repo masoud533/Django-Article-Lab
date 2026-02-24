@@ -6,6 +6,7 @@ app_name = "api-v1"
 
 router = DefaultRouter()
 router.register('post3', views.PostViewSet,basename='post3')
+router.register('post4', views.PostModelViewSet,basename='post4')
 
 
 urlpatterns = [
