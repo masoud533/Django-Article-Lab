@@ -6,7 +6,7 @@ from blog.models import Post
 from django.shortcuts import get_object_or_404
 from rest_framework import status, mixins
 from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView,ListCreateAPIView
+from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 """ funtion base view """
 # @api_view(["GET", "POST"])
@@ -115,5 +115,8 @@ class PostList(ListCreateAPIView):
 #         return self.destroy(request, *args, **kwargs)
 
 
-class PostDetail():
-    pass
+class PostDetail(RetrieveUpdateDestroyAPIView):
+    """ getting detail of the post and edit plus removing it """
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = PostSerializer
+    queryset = Post.objects.filter(status=True)
